@@ -1,15 +1,14 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/demodb
-    username: demo
-    password:
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
+application:
+  postgres:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/demodb
+      username: demo
+      password:
+      driver-class-name: org.postgresql.Driver
+    jpa:
       hibernate:
+        ddl-auto: update
         jdbc:
           lob:
             non_contextual_creation: true
-        dialect: org.hibernate.dialect.ProgressDialect
+          dialect: org.hibernate.dialect.ProgressDialect
