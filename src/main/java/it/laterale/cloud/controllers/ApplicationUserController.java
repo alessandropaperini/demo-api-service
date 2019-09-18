@@ -40,4 +40,16 @@ public class ApplicationUserController {
         ApplicationUserDto result = this.applicationUserService.getById(id);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
+
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
+    @GetMapping
+    public ResponseEntity<ApplicationUserDto> getByEmail(@RequestParam(value = "email") String email) {
+        ApplicationUserDto result = this.applicationUserService.getByEmail(email);
+        return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
+    }
 }

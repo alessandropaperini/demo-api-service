@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "application_user")
+@NamedQuery(name = "user.findByEmail", query = "from ApplicationUser u where u.email = :email")
 public class ApplicationUser {
 
     @Id
