@@ -6,9 +6,9 @@ application:
       password:
       driver-class-name: org.postgresql.Driver
     jpa:
+      generate-ddl: true
       hibernate:
         ddl-auto: update
         jdbc:
           lob:
             non_contextual_creation: true
-          dialect: org.hibernate.dialect.ProgressDialect

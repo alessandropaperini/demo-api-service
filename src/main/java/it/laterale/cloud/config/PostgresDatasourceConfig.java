@@ -56,9 +56,8 @@ public class PostgresDatasourceConfig {
         postgresEntityManager.setDataSource(postgresDataSource());
         postgresEntityManager.setPackagesToScan(new String[] {"it.laterale.cloud.entities"});
         HashMap<String, Object> hibernateProperties = new HashMap<>();
-        hibernateProperties.put("hibernate.ddl-auto", env.getProperty("application.postgres.jpa.hibernate.ddl-auto"));
+        hibernateProperties.put("hibernate.hbm2ddl.auto", env.getProperty("application.postgres.jpa.hibernate.ddl-auto"));
         hibernateProperties.put("hibernate.jdbc.lob.non_contextual_creation", env.getProperty("application.postgres.jpa.hibernate.jdbc.lob.non_contextual_creation"));
-        hibernateProperties.put("hibernate.dialect", env.getProperty("application.postgres.jpa.hibernate.jdbc.dialect"));
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         postgresEntityManager.setJpaVendorAdapter(vendorAdapter);
         postgresEntityManager.setJpaPropertyMap(hibernateProperties);
