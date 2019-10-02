@@ -1,3 +1,9 @@
+spring:
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+
 application:
   postgres:
     datasource:
