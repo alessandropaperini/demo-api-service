@@ -21,3 +21,7 @@ application:
         jdbc:
           lob:
             non_contextual_creation: true
+
+logging:
+  level:
+    it.laterale.cloud: DEBUG
