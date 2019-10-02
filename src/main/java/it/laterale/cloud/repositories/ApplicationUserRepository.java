@@ -15,12 +15,35 @@ import java.util.Optional;
 @Repository
 public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
 
+    /**
+     * Find by email optional.
+     *
+     * @param email the email
+     * @return the optional
+     */
     public Optional<ApplicationUser> findByEmail(String email);
 
+    /**
+     * Find by order by age asc collection.
+     *
+     * @return the collection
+     */
     public Collection<ApplicationUser> findByOrderByAgeAsc();
 
+    /**
+     * Find by age greater than collection.
+     *
+     * @param age the age
+     * @return the collection
+     */
     public Collection<ApplicationUser> findByAgeGreaterThan(Integer age);
 
+    /**
+     * Find by name collection.
+     *
+     * @param name the name
+     * @return the collection
+     */
     @Query("from ApplicationUser u where u.name = :name ")
     public Collection<ApplicationUser> findByName(@Param("name") String name);
 }

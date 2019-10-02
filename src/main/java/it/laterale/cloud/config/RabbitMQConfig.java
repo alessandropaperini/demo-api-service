@@ -7,13 +7,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+/**
+ * The type Rabbit mq config.
+ */
 @Configuration
 @Slf4j
 public class RabbitMQConfig {
 
     @Autowired
-    Environment env;
+    private Environment env;
 
+    /**
+     * Ball queue queue.
+     *
+     * @return the queue
+     */
     @Bean
     public Queue ballQueue() {
         return createQueue(this.env.getProperty("spring.rabbitmq.queue.ball.name"));

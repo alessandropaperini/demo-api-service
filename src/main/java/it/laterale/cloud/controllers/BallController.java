@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Ball controller.
+ */
 @RestController
 @RequestMapping("api/v1/ball")
 public class BallController {
@@ -20,6 +23,12 @@ public class BallController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    /**
+     * Input response entity.
+     *
+     * @param body the body
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<Void> input(@RequestBody Ball body) {
         rabbitTemplate.convertAndSend(ballQueue.getName(), body);
