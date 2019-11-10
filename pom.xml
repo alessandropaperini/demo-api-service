@@ -17,7 +17,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<commons-lib-version>1.0.0-SNAPSHOT</commons-lib-version>
+		<commons-lib.version>1.0.0-SNAPSHOT</commons-lib.version>
 	</properties>
 
 	<dependencies>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>it.laterale.cloud</groupId>
 			<artifactId>demo-commons-lib</artifactId>
-			<version>${commons-lib-version}</version>
+			<version>${commons-lib.version}</version>
 		</dependency>
 
 		<dependency>
