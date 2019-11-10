@@ -1,5 +1,7 @@
 package it.laterale.cloud.controllers;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import it.laterale.cloud.dtos.Ball;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -30,8 +32,11 @@ public class BallController {
      * @return the response entity
      */
     @PostMapping
-    public ResponseEntity<Void> input(@RequestBody Ball body) {
+    @ApiOperation(value = "input ball", notes = "add ball from input")
+    public ResponseEntity<Void> input(
+            @ApiParam(name = "body", value = "the type Ball body request") @RequestBody Ball body) {
         rabbitTemplate.convertAndSend(ballQueue.getName(), body);
         return ResponseEntity.noContent().build();
     }
+
 }
