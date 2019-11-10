@@ -1,15 +1,27 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/demodb
-    username: demo
-    password:
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    queue:
+      ball:
+        name: ball-queue
+
+application:
+  postgres:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/demodb
+      username: demo
+      password:
+      driver-class-name: org.postgresql.Driver
+    jpa:
+      generate-ddl: true
       hibernate:
+        ddl-auto: update
         jdbc:
           lob:
             non_contextual_creation: true
-        dialect: org.hibernate.dialect.ProgressDialect
+
+logging:
+  level:
+    it.laterale.cloud: DEBUG

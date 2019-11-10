@@ -9,13 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.laterale.cloud</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>demo-api-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>demo-api-service</name>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<commons-lib.version>1.0.0-SNAPSHOT</commons-lib.version>
+		<springfox.version>2.9.1</springfox.version>
 	</properties>
 
 	<dependencies>
@@ -26,6 +29,25 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>it.laterale.cloud</groupId>
+			<artifactId>demo-commons-lib</artifactId>
+			<version>${commons-lib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.version}</version>
 		</dependency>
 
 		<dependency>
@@ -51,10 +73,27 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.8</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
