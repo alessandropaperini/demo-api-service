@@ -18,6 +18,7 @@
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<commons-lib.version>1.0.0-SNAPSHOT</commons-lib.version>
+		<springfox.version>2.9.1</springfox.version>
 	</properties>
 
 	<dependencies>
@@ -37,6 +38,16 @@
 			<groupId>it.laterale.cloud</groupId>
 			<artifactId>demo-commons-lib</artifactId>
 			<version>${commons-lib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.version}</version>
 		</dependency>
 
 		<dependency>

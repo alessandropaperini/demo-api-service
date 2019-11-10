@@ -1,5 +1,7 @@
 package it.laterale.cloud.controllers;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import it.laterale.cloud.dtos.ApplicationUserDto;
 import it.laterale.cloud.dtos.input.ApplicationUserInputDto;
 import it.laterale.cloud.services.ApplicationUserService;
@@ -24,7 +26,9 @@ public class ApplicationUserController {
      * @return the response entity
      */
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody ApplicationUserInputDto body) {
+    @ApiOperation(value = "create user", notes = "create new user from input")
+    public ResponseEntity<Void> create(
+            @ApiParam(name = "body", value = "the type ApplicationUserInputDto body request") @RequestBody ApplicationUserInputDto body) {
         this.applicationUserService.create(body);
         return ResponseEntity.noContent().build();
     }
@@ -36,7 +40,9 @@ public class ApplicationUserController {
      * @return the by id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApplicationUserDto> getById(@PathVariable("id") Long id) {
+    @ApiOperation(value = "get user", notes = "get user by id")
+    public ResponseEntity<ApplicationUserDto> getById(
+            @ApiParam(name = "id", value = "the unique user id") @PathVariable("id") Long id) {
         ApplicationUserDto result = this.applicationUserService.getById(id);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
@@ -48,7 +54,9 @@ public class ApplicationUserController {
      * @return the by email
      */
     @GetMapping
-    public ResponseEntity<ApplicationUserDto> getByEmail(@RequestParam(value = "email") String email) {
+    @ApiOperation(value = "get user by email")
+    public ResponseEntity<ApplicationUserDto> getByEmail(
+            @ApiParam(name = "email", value = "the user email") @RequestParam(value = "email") String email) {
         ApplicationUserDto result = this.applicationUserService.getByEmail(email);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
