@@ -46,4 +46,13 @@ public interface ApplicationUserRepository extends JpaRepository<ApplicationUser
      */
     @Query("from ApplicationUser u where u.name = :name ")
     public Collection<ApplicationUser> findByName(@Param("name") String name);
+
+    /**
+     * Find by username and password application user.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the application user
+     */
+    public ApplicationUser findByUsernameAndPassword(String username, String password);
 }

@@ -25,3 +25,8 @@ application:
 logging:
   level:
     it.laterale.cloud: DEBUG
+
+security:
+  secret: chiavesupersegretissima
+  prefix: 'Bearer '
+  param: Authorization

@@ -24,6 +24,7 @@ public class ApplicationUserMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPassword(entity.getPassword());
+        dto.setUsername(entity.getUsername());
         return dto;
     }
 
@@ -40,6 +41,7 @@ public class ApplicationUserMapper {
         entity.setEmail(dto.getEmail());
         entity.setName(dto.getName());
         entity.setPassword(dto.getPassword());
+        entity.setUsername(dto.getUsername());
         return entity;
     }
 
@@ -55,6 +57,7 @@ public class ApplicationUserMapper {
         entity.setEmail(dto.getEmail());
         entity.setName(dto.getName());
         entity.setPassword(dto.getPassword());
+        entity.setUsername(dto.getUsername());
         return entity;
     }
 }

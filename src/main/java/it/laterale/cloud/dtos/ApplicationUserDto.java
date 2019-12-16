@@ -11,6 +11,7 @@ public class ApplicationUserDto {
     private String name;
     private Integer age;
     private String email;
+    private String username;
     @JsonIgnore
     private String password;
 
@@ -84,6 +85,24 @@ public class ApplicationUserDto {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets username.
+     *
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sets username.
+     *
+     * @param username the username
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
