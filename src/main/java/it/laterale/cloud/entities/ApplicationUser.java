@@ -21,6 +21,9 @@ public class ApplicationUser {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "username", nullable = false)
+    private String username;
+
     @Column(name = "age")
     private Integer age;
 

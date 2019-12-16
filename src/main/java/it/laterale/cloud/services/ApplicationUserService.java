@@ -3,6 +3,7 @@ package it.laterale.cloud.services;
 import it.laterale.cloud.dao.UserDao;
 import it.laterale.cloud.dtos.ApplicationUserDto;
 import it.laterale.cloud.dtos.input.ApplicationUserInputDto;
+import it.laterale.cloud.entities.ApplicationUser;
 import it.laterale.cloud.mappers.ApplicationUserMapper;
 import it.laterale.cloud.repositories.ApplicationUserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +71,17 @@ public class ApplicationUserService {
             log.error(ERROR_EXECUTING_QUERY, e);
             return null;
         }
+    }
+
+    /**
+     * Gets by username and password.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the by username and password
+     */
+    public ApplicationUser getByUsernameAndPassword(String username, String password) {
+        return applicationUserRepository.findByUsernameAndPassword(username, password);
     }
 
 }

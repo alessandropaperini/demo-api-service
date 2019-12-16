@@ -7,6 +7,7 @@ public class ApplicationUserInputDto {
 
     private String name;
     private String email;
+    private String username;
     private Integer age;
     private String password;
 
@@ -44,6 +45,24 @@ public class ApplicationUserInputDto {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets username.
+     *
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Sets username.
+     *
+     * @param username the username
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
