@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>it.laterale.cloud</groupId>
 	<artifactId>demo-api-service</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<name>demo-api-service</name>
 
 	<properties>
