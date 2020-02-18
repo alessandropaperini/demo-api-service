@@ -1,5 +1,7 @@
 package it.laterale.cloud.controllers;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import it.laterale.cloud.dtos.LoginOutputDto;
 import it.laterale.cloud.dtos.input.ApplicationUserInputDto;
 import it.laterale.cloud.dtos.input.LoginInputDto;
@@ -32,8 +34,10 @@ public class AuthenticationController {
      * @param body the body
      * @return the response entity
      */
-    @PostMapping("/signin")
-    public ResponseEntity<Void> signin(@RequestBody ApplicationUserInputDto body) {
+    @PostMapping("/signup")
+    @ApiOperation(value = "add user", notes = "create new user from input")
+    public ResponseEntity<Void> signin(
+            @ApiParam(name = "body", value = "the type ApplicationUserInputDto body request") @RequestBody ApplicationUserInputDto body) {
         userService.create(body);
         return ResponseEntity.noContent().build();
     }
@@ -45,7 +49,9 @@ public class AuthenticationController {
      * @return the response entity
      */
     @PostMapping
-    public ResponseEntity<LoginOutputDto> authenticate(@RequestBody LoginInputDto body) {
+    @ApiOperation(value = "user login", notes = "perform user login")
+    public ResponseEntity<LoginOutputDto> authenticate(
+            @ApiParam(name = "body", value = "the type LoginInputDto body request") @RequestBody LoginInputDto body) {
         // verifica se l'utente è registrato su db
         ApplicationUser user = userService.getByUsernameAndPassword(body.getUsername(), body.getPassword());
         if (user == null) {

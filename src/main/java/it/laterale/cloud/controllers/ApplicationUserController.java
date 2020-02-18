@@ -20,29 +20,17 @@ public class ApplicationUserController {
     private ApplicationUserService applicationUserService;
 
     /**
-     * Create response entity.
-     *
-     * @param body the body
-     * @return the response entity
-     */
-    @PostMapping
-    @ApiOperation(value = "create user", notes = "create new user from input")
-    public ResponseEntity<Void> create(
-            @ApiParam(name = "body", value = "the type ApplicationUserInputDto body request") @RequestBody ApplicationUserInputDto body) {
-        this.applicationUserService.create(body);
-        return ResponseEntity.noContent().build();
-    }
-
-    /**
      * Gets by id.
      *
-     * @param id the id
+     * @param id            the id
+     * @param authorization the authorization
      * @return the by id
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "get user", notes = "get user by id")
     public ResponseEntity<ApplicationUserDto> getById(
-            @ApiParam(name = "id", value = "the unique user id") @PathVariable("id") Long id) {
+            @ApiParam(name = "id", value = "the unique user id") @PathVariable("id") Long id,
+            @ApiParam(name = "authorization", value = "the authentication request token") @RequestHeader("Authorization") String authorization) {
         ApplicationUserDto result = this.applicationUserService.getById(id);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
@@ -50,13 +38,15 @@ public class ApplicationUserController {
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param email         the email
+     * @param authorization the authorization
      * @return the by email
      */
     @GetMapping
     @ApiOperation(value = "get user by email")
     public ResponseEntity<ApplicationUserDto> getByEmail(
-            @ApiParam(name = "email", value = "the user email") @RequestParam(value = "email") String email) {
+            @ApiParam(name = "email", value = "the user email") @RequestParam(value = "email") String email,
+            @ApiParam(name = "authorization", value = "the authentication request token") @RequestHeader("Authorization") String authorization) {
         ApplicationUserDto result = this.applicationUserService.getByEmail(email);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
     }
