@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         new AuthorizationFilter(authenticationManager(), jwtProvider, prefix, param)
                 )
                 .authorizeRequests()
-                .antMatchers("/public/**").permitAll()
+                .antMatchers("/public/**", "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated();
     }
 }
