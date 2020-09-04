@@ -9,6 +9,7 @@ import it.laterale.cloud.entities.ApplicationUser;
 import it.laterale.cloud.security.JwtProvider;
 import it.laterale.cloud.services.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,7 +56,7 @@ public class AuthenticationController {
         // verifica se l'utente è registrato su db
         ApplicationUser user = userService.getByUsernameAndPassword(body.getUsername(), body.getPassword());
         if (user == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         // se voluto si può inserire alcune informazioni dell'utente nel jwt modificando il metodo createJwt().
