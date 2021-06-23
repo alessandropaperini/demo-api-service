@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+
+  demo-postgresql:
+    container_name: demo-postresql
+    image: postgres:9.5.4
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=demo
+      - POSTGRES_PASSWORD=demo
+      - POSTGRES_DB=demo
+      - TZ=Europe/Rome
