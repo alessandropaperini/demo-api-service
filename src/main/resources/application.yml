@@ -10,9 +10,9 @@ spring:
 application:
   postgres:
     datasource:
-      url: jdbc:postgresql://localhost:5432/demodb
+      url: jdbc:postgresql://localhost:5432/demo
       username: demo
-      password:
+      password: demo
       driver-class-name: org.postgresql.Driver
     jpa:
       generate-ddl: true
