@@ -1,6 +1,7 @@
 package it.laterale.cloud.security.filters;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import it.laterale.cloud.config.SecurityConfig;
 import it.laterale.cloud.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,40 +21,25 @@ import java.util.Collections;
  */
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
-    private JwtProvider jwtProvider;
-    private String prefix;
-    private String param;
-
     /**
      * Instantiates a new Authorization filter.
      *
      * @param authenticationManager the authentication manager
-     * @param jwtProvider           the jwt provider
-     * @param prefix                the prefix
-     * @param param                 the param
      */
     @Autowired
-    public AuthorizationFilter(AuthenticationManager authenticationManager, JwtProvider jwtProvider, String prefix, String param) {
+    public AuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
-        this.jwtProvider = jwtProvider;
-        this.prefix = prefix;
-        this.param = param;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(param);
-        if (header == null || !header.startsWith(prefix)) {
-            chain.doFilter(req, res);
-            return;
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String header = request.getHeader(SecurityConfig.param);
+        if (header != null && header.startsWith(SecurityConfig.prefix)) {
+            DecodedJWT decoded = JwtProvider.verifyJwt(header.replace(SecurityConfig.prefix, ""));
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken(decoded.getSubject(), null, Collections.emptyList())
+            );
         }
-        UsernamePasswordAuthenticationToken authentication = this.getAuthentication(header);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
-    }
-
-    private UsernamePasswordAuthenticationToken getAuthentication(String header) {
-        DecodedJWT decoded = jwtProvider.decodeJwt(header);
-        return new UsernamePasswordAuthenticationToken(decoded.getSubject(), null, Collections.emptyList());
+        chain.doFilter(request, response);
     }
 }
