@@ -31,17 +31,19 @@ public class TeamController {
 
     @GetMapping("{id}")
     @ApiOperation(value = "get team", notes = "get team by id")
-    public Team getById(
-            @ApiParam(name = "id", value = "the unique team id") @PathVariable(name = "id") Long id
-    ) {
+    public Team getById(@ApiParam(name = "id", value = "the unique team id") @PathVariable(name = "id") Long id) {
         return this.teamRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping
+    @ApiOperation(value = "get team", notes = "get team by name")
+    public Team getByName(@ApiParam(name = "name", value = "the unique team name") @RequestParam("name") String name) {
+        return this.teamRepository.findByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
     @ApiOperation(value = "create", notes = "create new team")
-    public Team create(
-            @ApiParam(name = "dto", value = "the body request") @RequestBody TeamDto dto
-    ) {
+    public Team create(@ApiParam(name = "dto", value = "the body request") @RequestBody TeamDto dto) {
         List<User> users = this.userRepository.findAllById(dto.getUsers());
         if (users.size() < dto.getUsers().size()) {
             log.warn("Some users have not been added because they do not exist");
@@ -53,7 +55,10 @@ public class TeamController {
     }
 
     @PatchMapping("{id}")
-    public Team addMembers(@RequestBody List<Long> members, @PathVariable("id") Long id) {
+    public Team addMembers(
+            @ApiParam(name = "dto", value = "the body request") @RequestBody List<Long> members,
+            @ApiParam(name = "id", value = "the unique team id") @PathVariable("id") Long id
+    ) {
         Team team = this.teamRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<User> users = this.userRepository.findAllById(members);
         if (users.size() < members.size()) {
@@ -61,5 +66,12 @@ public class TeamController {
         }
         team.setMembers(new HashSet<>(users));
         return this.teamRepository.save(team);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@ApiParam(name = "id", value = "the unique team id") @PathVariable("id") Long id) {
+        Team entity = this.teamRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        this.teamRepository.delete(entity);
     }
 }
