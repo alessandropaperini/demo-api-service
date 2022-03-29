@@ -51,4 +51,15 @@ public class TeamController {
         team.setMembers(new HashSet<>(users));
         return this.teamRepository.save(team);
     }
+
+    @PatchMapping("{id}")
+    public Team addMembers(@RequestBody List<Long> members, @PathVariable("id") Long id) {
+        Team team = this.teamRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        List<User> users = this.userRepository.findAllById(members);
+        if (users.size() < members.size()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "One or more users were not found");
+        }
+        team.setMembers(new HashSet<>(users));
+        return this.teamRepository.save(team);
+    }
 }
