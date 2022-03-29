@@ -21,7 +21,7 @@ public class Team {
         this.id = id;
     }
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     public String getName() {
         return name;
     }
