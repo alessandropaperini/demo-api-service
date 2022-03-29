@@ -4,11 +4,14 @@ services:
 
   demo-postgresql:
     container_name: demo-postresql
-    image: postgres:9.5.4
+    image: postgres:14.2
     ports:
       - 5432:5432
+#    volumes:
+#      - ./volumes/postgresql/data:/var/lib/postgresql/data
     environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_USER=demo
-      - POSTGRES_PASSWORD=demo
-      - POSTGRES_DB=demo
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=demodb
       - TZ=Europe/Rome
