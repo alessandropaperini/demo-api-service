@@ -1,7 +1,5 @@
 package it.laterale.cloud.controllers;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import it.laterale.cloud.dtos.UserDto;
 import it.laterale.cloud.model.User;
 import it.laterale.cloud.repositories.UserRepository;
@@ -24,18 +22,12 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("{id}")
-    @ApiOperation(value = "get user", notes = "get user by id")
-    public User getById(
-            @ApiParam(name = "id", value = "the unique user id") @PathVariable("id") Long id,
-            @ApiParam(name = "authorization", value = "the authentication request token") @RequestHeader("Authorization") String authorization) {
+    public User getById(@PathVariable("id") Long id) {
         return this.userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    @ApiOperation(value = "get user by email")
-    public User getByEmail(
-            @ApiParam(name = "email", value = "the user email") @RequestParam(value = "email") String email,
-            @ApiParam(name = "authorization", value = "the authentication request token") @RequestHeader("Authorization") String authorization) {
+    public User getByEmail(@RequestParam(value = "email") String email) {
         return this.userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -45,8 +37,7 @@ public class UserController {
     }
 
     @PostMapping
-    @ApiOperation(value = "create", notes = "create new user")
-    public User create(@ApiParam(name = "userDto", value = "the body request") @RequestBody UserDto userDto) {
+    public User create(@RequestBody UserDto userDto) {
         return this.userRepository.save(userDto.toEntity(this.passwordEncoder));
     }
 

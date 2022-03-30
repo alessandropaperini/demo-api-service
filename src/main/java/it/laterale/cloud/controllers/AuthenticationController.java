@@ -1,7 +1,5 @@
 package it.laterale.cloud.controllers;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import it.laterale.cloud.dtos.AuthenticationDto;
 import it.laterale.cloud.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,7 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping
-    @ApiOperation(value = "user login", notes = "perform user login")
-    public String login(@ApiParam(name = "authDto", value = "the body request") @RequestBody AuthenticationDto authDto) {
+    public String login(@RequestBody AuthenticationDto authDto) {
         return this.authenticationService.login(authDto.getEmail(), authDto.getPassword());
     }
 }
