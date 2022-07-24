@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.laterale.cloud</groupId>
 	<artifactId>demo-api-service</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>demo-api-service</name>
 
 	<properties>
