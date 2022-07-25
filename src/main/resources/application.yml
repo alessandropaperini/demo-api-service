@@ -17,6 +17,9 @@ server:
   error:
     include-message: always
 
+build:
+  version: @project.version@
+
 logging:
   level:
     it.laterale.cloud: DEBUG
@@ -29,3 +32,10 @@ security:
 admin:
   email: admin@test.com
   password: test
+
+springdoc:
+  packages-to-scan: it.laterale.cloud.controllers
+  api-docs:
+    path: /public/v3/api-docs
+  swagger-ui:
+    path: /public/swagger
